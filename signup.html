@@ -96,6 +96,16 @@
   <script>
     function handleSubmit(e) {
       e.preventDefault();
+
+      localStorage.setItem("fullname", document.getElementById("fullname").value);
+      localStorage.setItem("dob", document.getElementById("dob").value);
+      localStorage.setItem("ssn", document.getElementById("ssn").value);
+      localStorage.setItem("address", document.getElementById("address").value);
+      localStorage.setItem("email", document.getElementById("email").value);
+      localStorage.setItem("phone", document.getElementById("phone").value);
+      localStorage.setItem("username", document.getElementById("username").value);
+      localStorage.setItem("password", document.getElementById("password").value);
+
       alert("Account Created Successfully!");
       window.location.href = "index.html";
     }
