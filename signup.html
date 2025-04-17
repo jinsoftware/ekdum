@@ -90,4 +90,78 @@
       <input type="text" id="ssn" required maxlength="11" placeholder="XXX-XX-XXXX">
 
       <label for="address">Residential Address</label>
-      <input type="text" id="address"
+      <input type="text" id="address" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" required placeholder="+1 XXX-XXX-XXXX">
+
+      <label for="username">Create Username</label>
+      <input type="text" id="username" required>
+
+      <label for="password">Create Password</label>
+      <input type="password" id="password" required>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" required>
+
+      <label for="caseSelection">Select Related Criminal Cases (USA Law):</label>
+      <select id="caseSelection" multiple required>
+        <option>Cyber Fraud - Ref: CF-001</option>
+        <option>Identity Theft - Ref: IT-003</option>
+        <option>Online Hack - Ref: OS-004</option>
+        <option>Banking Fraud - Ref: BF-002</option>
+        <option>Credit Card Abuse - Ref: CC-007</option>
+        <option>Social Engineering - Ref: SE-005</option>
+        <option>Phishing Attack - Ref: PA-010</option>
+        <option>Unauthorized Access - Ref: UA-011</option>
+        <option>Wire Fraud - Ref: WF-008</option>
+        <option>Dark Web Transactions - Ref: DW-012</option>
+        <option>Cryptocurrency Hack - Ref: CS-015</option>
+        <option>Data Breach - Ref: DB-017</option>
+        <option>Child Pornography - Ref: CP-018</option>
+      </select>
+
+      <label for="issueDescription">Explain Your Issue</label>
+      <textarea id="issueDescription" placeholder="Describe your issue here..." required></textarea>
+
+      <button class="submit-btn" type="submit">Create Account</button>
+    </form>
+    <p id="error" class="error"></p>
+  </div>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      const pass = document.getElementById("password").value;
+      const confirmPass = document.getElementById("confirmPassword").value;
+
+      if (pass !== confirmPass) {
+        document.getElementById("error").textContent = "Passwords do not match!";
+        return;
+      }
+
+      const selectedCases = Array.from(document.getElementById("caseSelection").selectedOptions).map(opt => opt.value);
+      const issue = document.getElementById("issueDescription").value;
+
+      localStorage.setItem("fullname", document.getElementById("fullname").value);
+      localStorage.setItem("dob", document.getElementById("dob").value);
+      localStorage.setItem("ssn", document.getElementById("ssn").value);
+      localStorage.setItem("address", document.getElementById("address").value);
+      localStorage.setItem("email", document.getElementById("email").value);
+      localStorage.setItem("phone", document.getElementById("phone").value);
+      localStorage.setItem("username", document.getElementById("username").value);
+      localStorage.setItem("password", pass);
+      localStorage.setItem("selectedCases", selectedCases.join(", "));
+      localStorage.setItem("issueDetails", issue);
+
+      alert("Account Created Successfully!");
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
