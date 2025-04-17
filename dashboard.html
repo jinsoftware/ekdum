@@ -28,19 +28,47 @@
       justify-content: space-between;
     }
 
+    .header .left {
+      display: flex;
+      align-items: center;
+    }
+
     .header img {
       height: 50px;
+      margin-right: 15px;
     }
 
     .header h1 {
       font-size: 22px;
-      margin-left: 15px;
+    }
+
+    .user-area {
+      text-align: right;
+    }
+
+    .user-name {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .logout-btn {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background: #d93636;
     }
 
     .content {
       flex: 1;
       max-width: 800px;
-      margin: 40px auto;
+      margin: 30px auto;
       padding: 30px;
       background: white;
       border-radius: 10px;
@@ -53,14 +81,21 @@
       color: #1a1a2e;
     }
 
-    .info {
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
       margin-bottom: 15px;
+      color: #1a1a2e;
+    }
+
+    .info {
+      margin-bottom: 12px;
       font-size: 16px;
       color: #333;
     }
 
     .info strong {
-      width: 180px;
+      width: 160px;
       display: inline-block;
     }
 
@@ -76,15 +111,23 @@
 <body>
 
   <div class="header">
-    <div style="display: flex; align-items: center;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/FTC_seal.svg/1200px-FTC_seal.svg.png" alt="FTC Logo">
+    <div class="left">
+      <img src="ftc.png" alt="FTC Logo">
       <h1>FTC Secure Wallet Department</h1>
+    </div>
+    <div class="user-area">
+      <div class="user-name" id="usernameDisplay">Welcome, User</div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
   </div>
 
   <div class="content">
-    <h2>Welcome, <span id="name">User</span></h2>
-    
+    <h2>Accounts Summary</h2>
+
+    <div class="section-title">Available Balance</div>
+    <div class="info"><strong>Current Balance:</strong> $0.00</div>
+
+    <div class="section-title">User Information</div>
     <div class="info"><strong>Full Name:</strong> <span id="fullname"></span></div>
     <div class="info"><strong>Date of Birth:</strong> <span id="dob"></span></div>
     <div class="info"><strong>SSN:</strong> <span id="ssn"></span></div>
@@ -99,14 +142,22 @@
   </div>
 
   <script>
-    document.getElementById("name").textContent = localStorage.getItem("fullname") || "User";
-    document.getElementById("fullname").textContent = localStorage.getItem("fullname");
+    const fullname = localStorage.getItem("fullname");
+    const username = localStorage.getItem("username");
+
+    document.getElementById("usernameDisplay").textContent = `Welcome, ${fullname || "User"}`;
+    document.getElementById("fullname").textContent = fullname;
     document.getElementById("dob").textContent = localStorage.getItem("dob");
     document.getElementById("ssn").textContent = localStorage.getItem("ssn");
     document.getElementById("address").textContent = localStorage.getItem("address");
     document.getElementById("email").textContent = localStorage.getItem("email");
     document.getElementById("phone").textContent = localStorage.getItem("phone");
-    document.getElementById("username").textContent = localStorage.getItem("username");
+    document.getElementById("username").textContent = username;
+
+    function logout() {
+      alert("You have been logged out.");
+      window.location.href = "index.html";
+    }
   </script>
 
 </body>
